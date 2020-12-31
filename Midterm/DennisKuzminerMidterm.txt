@@ -1,0 +1,136 @@
+-------------------Question 1:---------------------
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+
+int whichOne(char C, char *s1, char *s2)
+{
+    int counts1 = 0;
+    int counts2 = 0;
+    if (isdigit(C))
+    {
+        for (int i = 0; i < strlen(s1); i++)
+        {
+            if (s1[i] == C)
+            {
+                counts1++;
+            }
+        }
+        for (int i = 0; i < strlen(s2); i++)
+        {
+            if (s2[i] == C)
+            {
+                counts2++;
+            }
+        }
+        if (counts1 > counts2)
+        {
+            printf("string one is the one\n");
+            return counts1;
+        }
+        else
+        {
+            if (counts2 > counts1)
+            {
+                printf("string two is the one\n");
+                return counts2;
+            }
+            else
+            {
+                printf("neither string is the one\n");
+                return 0;
+            }
+        }
+    }
+    else
+    {
+        fprintf(stderr, "The char arg must be a digit.\n");
+        exit(-1);
+    }
+}
+
+int main(int argc, char *argv[argc])
+{
+
+    whichOne('a', "111", "111111");
+}
+
+
+
+
+
+------------------Question 2----------------------
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+    if (argc == 3)
+    {
+        char *str1 = argv[1];
+        char *str2 = argv[2];
+        for (int i = 0; i < strlen(str1); i++)
+        {
+            // char *ch = str1[i];
+            if (strchr(str2, str1[i]) == NULL)
+            {
+                putchar(str1[i]);
+            }
+        }
+        printf("\n");
+        for (int i = 0; i < strlen(str2); i++)
+        {
+            // char *ch = str2[i];
+            if (strchr(str1, str2[i]) == NULL)
+            {
+                putchar(str2[i]);
+            }
+        }
+    }
+    else
+    {
+        fprintf(stderr, "Must be 2 args.\n");
+        exit(-1);
+    }
+}
+
+
+
+--------------Question 3----------------------
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+char *mcopy(char *s, int n)
+{
+    char *result = (char *)malloc((strlen(s)) * (n));
+    for (int i = 0; i < (strlen(s)) * (n); i++)
+    {
+
+        result[i] = '\0';
+    }
+    int index = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < strlen(s); j++)
+        {
+            result[index] = s[j];
+            index++;
+        }
+    }
+    strcat(result, s);
+    return result;
+}
+
+
+int main(int argc, char *argv[])
+{
+    printf("Result: %s\n", mcopy("123def", 3));
+    printf("Result: %s\n", mcopy("hello", 6));
+    printf("Result: %s\n", mcopy("nooooooo", 2));
+    printf("Result: %s\n", mcopy("yessssssssssss", 3));
+}
